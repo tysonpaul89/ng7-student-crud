@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { StudentService } from '../student.service';
+import { StudentService, IStudent, IResponse } from '../student.service';
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -12,13 +12,26 @@ export class StudentListComponent implements OnInit {
   constructor(private studentService: StudentService) {
     this.studentService.getAllStudents().subscribe(
       (response: any) => {
-        console.log(response.data);
         this.allStudents = response.data;
       }
     );
   }
 
   ngOnInit() {
+  }
+
+  /**
+   * Delete button click event
+   * @param student Student Data
+   */
+  onDeleteStudentClick(student: IStudent) {
+    const isDelete = confirm('Are you sure to delete ' + student.name);
+    if (isDelete) {
+      this.studentService.deleteStudent(student._id).
+        subscribe(
+          (students: IStudent[] | IStudent) => this.allStudents = students
+        );
+    }
   }
 
 }

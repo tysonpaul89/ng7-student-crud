@@ -16,11 +16,11 @@
         <tr *ngFor="let student of allStudents">
           <td>{{student.name}}</td>
           <td>{{student.age}}</td>
-          <td>{{student.dob}}</td>
+          <td>{{student.dob | date:'dd-MM-yyyy'}}</td>
           <td>
             <a [routerLink]="['/student', student._id]" class="btn btn-primary">View Student</a>&nbsp;
             <a [routerLink]="['/edit-student', student._id]" class="btn btn-info">Edit Student</a>&nbsp;
-            <a [routerLink]="['/delete-student', student._id]" class="btn btn-danger">Delete Student</a>
+            <button (click)="onDeleteStudentClick(student)" class="btn btn-danger">Delete Student</button>
           </td>
         </tr>
       </tbody>
