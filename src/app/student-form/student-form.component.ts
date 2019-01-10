@@ -14,6 +14,10 @@ export class StudentFormComponent implements OnInit {
   // Note: variables used for storing observables are ending a $ sign. its just for identification
   @Input() studentSub$: Observable<IStudent>;
 
+  // Action Type passed by the parent to recognize the action
+  // The value will be either 'create' or 'update'
+  @Input() actionType: string;
+
   /**
    * Creating Reactive Form
    * https://angular.io/guide/reactive-forms#introduction-to-reactive-forms
@@ -27,7 +31,7 @@ export class StudentFormComponent implements OnInit {
       Validators.max(20) // Max age
     ]),
     dob: new FormControl('', [Validators.required]),
-    studentID: new FormControl('')
+    _id: new FormControl('')
   });
 
   // Output property to pass data to the parent component(creat and edit)
@@ -38,7 +42,7 @@ export class StudentFormComponent implements OnInit {
    * To store the initial student state on edit functionality
    */
   private studentData: {
-    studentID: string,
+    _id: string,
     name: string,
     age: number,
     dob: string
@@ -53,7 +57,7 @@ export class StudentFormComponent implements OnInit {
   get name() { return this.studentForm.get('name'); }
   get age() { return this.studentForm.get('age'); }
   get dob() { return this.studentForm.get('dob'); }
-  get studentID() { return this.studentForm.get('studentID'); }
+  get _id() { return this.studentForm.get('_id'); }
 
   /**
    * Student form submit event
@@ -67,25 +71,26 @@ export class StudentFormComponent implements OnInit {
   ngOnInit() {
     // studentSub is an output property and has an observable as its value
     // The variable name has $ symbol to identify that its an observable
-    this.studentSub$.subscribe(
-      (student: IStudent) => {
-        this.studentForm.patchValue({
-          name: student.name,
-          age: student.age,
-          dob: student.dob,
-          studentID: student._id
-        });
-        this.studentData = this.studentForm.value;
-        console.log('studentData', this.studentData);
-      }
-    );
+    if (this.studentSub$ && this.actionType == 'update') {
+      this.studentSub$.subscribe(
+        (student: IStudent) => {
+          this.studentForm.patchValue({
+            name: student.name,
+            age: student.age,
+            dob: student.dob,
+            _id: student._id
+          });
+          this.studentData = this.studentForm.value;
+        }
+      );
+    }
   }
 
   /**
    * To reset student form
    */
   resetForm() {
-    if (this.studentID.value) {
+    if (this.actionType == 'update') {
       this.studentForm.reset(this.studentData);
     } else {
       this.studentForm.reset();

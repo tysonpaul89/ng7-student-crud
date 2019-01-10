@@ -73,6 +73,26 @@ export class StudentService {
     return this.http.post<IResponse>(url, studentData, httpOptions);
   }
 
+  /**
+   * Create Student
+   * @param studentData Student Data
+   */
+  updateStudent(studentData: IStudent) {
+    if (studentData._id.length) {
+      const url = this.serviceUrl + 'student/' + studentData._id;
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+        })
+      };
+      return this.http.put<IResponse>(url, studentData, httpOptions);
+    }
+  }
+
+  /**
+   * Delete Student
+   * @param id Student ID
+   */
   deleteStudent(id: string) {
     const url = this.serviceUrl + 'student/' + id;
     const httpOptions = {

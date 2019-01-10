@@ -44,7 +44,7 @@
   <button
     type="submit"
     [disabled]="!studentForm.valid"
-    [innerText]="studentID ? 'Update' : 'Create'"
+    [innerText]="actionType == 'update' ? 'Update' : 'Create'"
     class="btn btn-success"></button>&nbsp;
   <button type="button" [disabled]="!studentForm.touched || !studentForm.dirty" (click)="resetForm()"  class="btn btn-danger">Reset Form</button>&nbsp;
   <a type="button" class="btn btn-info" routerLink="/students">Go Back</a>
