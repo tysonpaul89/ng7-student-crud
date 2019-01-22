@@ -1,0 +1,26 @@
+<ng-container *ngIf="surveyData">
+  <!-- Survey -->
+  <ng-container *ngFor="let survey of surveyData; trackBy: survey?.id">
+    <h2>{{survey.name}}</h2>
+    <!-- Page -->
+    <div class="page" *ngFor="let page of survey.pages; trackBy: page?.order">
+      <h4>{{page.title}}</h4>
+      <!-- Question -->
+      <div class="question" *ngFor="let question of page.questions; trackBy: question?.order">
+        <ng-container *ngIf="question.question_type.status">
+          <ng-container [ngSwitch]="+question.question_type.question_type">
+            <ng-container *ngSwitchCase="questionType.singleInput">
+              <app-single-input [question]="question"></app-single-input>
+            </ng-container>
+            <ng-container *ngSwitchCase="questionType.checkbox">
+                <app-checkbox [question]="question"></app-checkbox>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+      <!-- ./Question -->
+    </div>
+    <!-- ./Page -->
+  </ng-container>
+  <!-- ./Survey -->
+</ng-container>

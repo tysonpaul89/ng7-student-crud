@@ -1,0 +1,9 @@
+<div class="form-group">
+  <span>{{question.question}}</span>
+  <div class="form-check" *ngFor="let option of question.options; trackBy: option?.order">
+    <input class="form-check-input" type="checkbox" value="{{option.value}}" id="checkbox-{{option.order}}">
+    <label class="form-check-label" for="checkbox-{{option.order}}">
+        {{option.name}}
+    </label>
+  </div>
+</div>

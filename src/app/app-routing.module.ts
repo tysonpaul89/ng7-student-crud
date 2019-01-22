@@ -5,9 +5,11 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { StudentViewComponent } from './student-view/student-view.component';
 import { StudentCreateComponent } from './student-create/student-create.component';
 import { StudentEditComponent } from './student-edit/student-edit.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'students', pathMatch: 'full'}, // To redirect / to students route
+  {path: '', redirectTo: 'test', pathMatch: 'full'}, // To redirect / to students route
+  {path: 'test', component: TestComponent}, // TEST
   {path: 'students', component: StudentListComponent}, // To List all students
   {path: 'create-student', component: StudentCreateComponent}, // To Create student
   {path: 'edit-student/:id', component: StudentEditComponent}, // To Edit student
