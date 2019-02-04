@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StudentListComponent } from './student-list.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('StudentListComponent', () => {
   let component: StudentListComponent;
@@ -8,7 +10,11 @@ describe('StudentListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentListComponent ]
+      declarations: [ StudentListComponent ],
+      imports: [
+        RouterTestingModule,
+        HttpClientModule
+      ],
     })
     .compileComponents();
   }));
@@ -22,4 +28,5 @@ describe('StudentListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

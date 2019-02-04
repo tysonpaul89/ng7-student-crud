@@ -12,11 +12,13 @@ export class StudentFormComponent implements OnInit {
   // Input property to receives student subscription data from edit page(parent)
   // https://angular.io/guide/component-interaction#pass-data-from-parent-to-child-with-input-binding
   // Note: variables used for storing observables are ending a $ sign. its just for identification
-  @Input() studentSub$: Observable<IStudent>;
+  @Input()
+  public studentSub$: Observable<IStudent>;
 
   // Action Type passed by the parent to recognize the action
   // The value will be either 'create' or 'update'
-  @Input() actionType: string;
+  @Input()
+  public actionType: string;
 
   /**
    * Creating Reactive Form
